@@ -4,16 +4,24 @@
   max-width: 100%;
 }
 
+body {
+  background-image: url("./assets/springbackground.jpg");
+  background-size: cover;
+}
+
 h1 {
   text-align: center;
-  font-size: 100px;
+  font-size: 125px;
   margin: 10px;
   text-transform: uppercase;
+  color: #ff5d5d;
 }
 
 #eggClick {
   display: block;
-  margin-left: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
   background-color: transparent;
   border: none;
   width: 470px;
@@ -33,4 +41,182 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: 200px;
+}
+
+#mainStats {
+  margin-left: 200px;
+  margin-top: -450px;
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#eggCount,
+#epsCount {
+  display: block;
+  margin-bottom: 40px;
+  color: #2cac5d;
+}
+
+#reset {
+  margin-left: 200px;
+  margin-top: 50px;
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #ff5d5d;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+}
+
+#reset:hover {
+  background-color: #e74b4b;
+  cursor: pointer;
+}
+
+#eggUpgradeContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: -300px;
+  align-items: flex-end;
+}
+
+#eggUpgrade1 {
+  margin-bottom: 30px;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #3da4f8;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+}
+
+#eggUpgrade1:hover {
+  background-color: #3c8df7;
+  cursor: pointer;
+}
+
+#eggUpgrade2 {
+  margin-bottom: 30px;
+  margin-right: 200px;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #e788db;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+}
+
+#eggUpgrade2:hover {
+  background-color: #c966bb;
+  cursor: pointer;
+}
+
+#eggUpgrade3 {
+  margin-bottom: 30px;
+  margin-right: 200px;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #74f074;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  width: 400px;
+}
+
+#eggUpgrade3:hover {
+  background-color: #60d460;
+  cursor: pointer;
+}
+
+/* researched how to add rainbow affect to font  */
+
+@keyframes rainbow {
+  0% {
+    color: red;
+  }
+  14% {
+    color: orange;
+  }
+  28% {
+    color: yellow;
+  }
+  42% {
+    color: green;
+  }
+  56% {
+    color: blue;
+  }
+  70% {
+    color: indigo;
+  }
+  84% {
+    color: violet;
+  }
+  100% {
+    color: red;
+  }
+}
+
+#eggUpgrade4 {
+  margin-bottom: 30px;
+  margin-right: 200px;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #fdff6a;
+  border: none;
+  border-radius: 12px;
+  width: 450px;
+  color: transparent; /* Set text color to transparent */
+  animation: rainbow 12s infinite; /* Apply rainbow animation */
+}
+
+#eggUpgrade4:hover {
+  background-color: #e5e76d;
+  cursor: pointer;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5px, 0);
+  }
+  20% {
+    transform: translate(5px, 0);
+  }
+  30% {
+    transform: translate(-5px, 0);
+  }
+  40% {
+    transform: translate(5px, 0);
+  }
+  50% {
+    transform: translate(-5px, 0);
+  }
+  60% {
+    transform: translate(5px, 0);
+  }
+  70% {
+    transform: translate(-5px, 0);
+  }
+  80% {
+    transform: translate(5px, 0);
+  }
+  90% {
+    transform: translate(-5px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out infinite;
 }

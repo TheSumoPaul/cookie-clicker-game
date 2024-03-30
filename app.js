@@ -1,5 +1,8 @@
 const eggClick = document.getElementById("eggClick");
 const eggUpgrade1 = document.getElementById("eggUpgrade1");
+const eggUpgrade2 = document.getElementById("eggUpgrade2");
+const eggUpgrade3 = document.getElementById("eggUpgrade3");
+const eggUpgrade4 = document.getElementById("eggUpgrade4");
 const eggCount = document.getElementById("eggCount");
 const epsCount = document.getElementById("epsCount");
 document.getElementById("reset").addEventListener("click", resetGameProgress);
@@ -8,24 +11,32 @@ const backgroundMusic = document.getElementById("backgroundMusic");
 
 backgroundMusic.volume = 0.15;
 
-let upgradeCount = 0;
+let upgradeCount1 = 0; // for first upgrade
+let upgradeCount2 = 0; // for second upgrade
+let upgradeCount3 = 0; // for third upgrade
+let upgradeCount4 = 0; // for fourth upgrade
+
+let originalMusicSrc = "./assets/silly.mp3"; // Original music source
 
 const stats = {
   eggCount: 0,
   eps: 0,
-  upgrades: 0,
 };
 
 const savedStats = JSON.parse(localStorage.getItem("stats"));
 if (savedStats !== null) {
   stats.eggCount = savedStats.eggCount;
   stats.eps = savedStats.eps;
-  stats.upgrades = savedStats.upgrades;
   updatePage();
 }
 
 eggClick.addEventListener("click", buyEgg);
+
 eggUpgrade1.addEventListener("click", buyUpgrade);
+eggUpgrade2.addEventListener("click", buyUpgrade2);
+eggUpgrade3.addEventListener("click", buyUpgrade3);
+eggUpgrade4.addEventListener("click", buyUpgrade4);
+
 eggClick.addEventListener("mousedown", function () {
   eggClick.classList.add("clicked"); // image gets smaller when held down with click
 });
@@ -34,18 +45,28 @@ eggClick.addEventListener("mouseup", function () {
   eggClick.classList.remove("clicked"); // image back to original scale when release click
 });
 
-// FUNCTIONS
-
 function updatePage() {
   eggCount.textContent = stats.eggCount + " eggs";
   epsCount.textContent = "per second " + stats.eps;
-  eggUpgrade1.textContent = "Get Upgrade (" + getUpgradeCost() + " eggs)";
+  eggUpgrade1.textContent = "Bunny Buddy (" + getUpgradeCost1() + " eggs)";
+  eggUpgrade2.textContent = "Hoppy Helpers (" + getUpgradeCost2() + " eggs)";
+  eggUpgrade3.textContent =
+    "Eggstravagant Enhancer (" + getUpgradeCost3() + " eggs)";
+  eggUpgrade4.textContent =
+    "BEASTLY Golden Egg Machine Generator-inator (" +
+    getUpgradeCost4() +
+    " eggs)";
 }
 
+// local storage
 function updateStorage() {
   stats.eggCount = stats.eggCount;
   stats.eps = stats.eps;
-  stats.upgrades = upgradeCount;
+  stats.upgrades = stats.upgrades;
+  stats.upgradeCount1 = upgradeCount1;
+  stats.upgradeCount2 = upgradeCount2;
+  stats.upgradeCount3 = upgradeCount3;
+  stats.upgradeCount4 = upgradeCount4;
   localStorage.setItem("stats", JSON.stringify(stats));
 }
 
@@ -56,11 +77,11 @@ function buyEgg() {
 }
 
 function buyUpgrade() {
-  const upgradeCost = getUpgradeCost();
+  const upgradeCost = getUpgradeCost1();
   if (stats.eggCount >= upgradeCost) {
     stats.eggCount -= upgradeCost;
     stats.eps += 1;
-    upgradeCount++;
+    upgradeCount1++;
     updatePage();
     updateStorage();
     playUpgradeButtonSound();
@@ -69,22 +90,91 @@ function buyUpgrade() {
   }
 }
 
-function getUpgradeCost() {
-  return 10 + upgradeCount * 10;
+function buyUpgrade2() {
+  const upgradeCost2 = getUpgradeCost2();
+  if (stats.eggCount >= upgradeCost2) {
+    stats.eggCount -= upgradeCost2;
+    stats.eps += 10;
+    upgradeCount2++;
+    updatePage();
+    updateStorage();
+    playUpgradeButtonSound();
+  } else {
+    alert("Not enough eggs to buy the upgrade!");
+  }
+}
+
+function buyUpgrade3() {
+  const upgradeCost3 = getUpgradeCost3();
+  if (stats.eggCount >= upgradeCost3) {
+    stats.eggCount -= upgradeCost3;
+    stats.eps += 100;
+    upgradeCount3++;
+    updatePage();
+    updateStorage();
+    playUpgradeButtonSound();
+  } else {
+    alert("Not enough eggs to buy the upgrade!");
+  }
+}
+
+function buyUpgrade4() {
+  const upgradeCost4 = getUpgradeCost4();
+  if (stats.eggCount >= upgradeCost4) {
+    stats.eggCount -= upgradeCost4;
+    stats.eps += 1000;
+    upgradeCount4++;
+    updatePage();
+    updateStorage();
+    playUpgradeButtonSound();
+    backgroundMusic.src = "./assets/BANG.mp3";
+    backgroundMusic.play();
+    document.body.classList.add("shake-animation");
+    setTimeout(() => {
+      document.body.classList.remove("shake-animation");
+      backgroundMusic.src = originalMusicSrc; // Revert back to original song
+      backgroundMusic.play();
+    }, 30000); // Remove the animation after 30 seconds
+  } else {
+    alert("Not enough eggs to buy the upgrade!");
+  }
+}
+
+function getUpgradeCost1() {
+  return 10 + upgradeCount1 * 10;
+}
+
+function getUpgradeCost2() {
+  return 100 + upgradeCount2 * 100;
+}
+
+function getUpgradeCost3() {
+  return 500 + upgradeCount3 * 500;
+}
+
+function getUpgradeCost4() {
+  return 10000 + upgradeCount4 * 10000;
 }
 
 function resetGameProgress() {
-  console.log("Before reset:", stats);
-  stats.eggCount = 0;
-  stats.eps = 0;
-  stats.upgrades = 0;
-  upgradeCount = 0;
-  localStorage.removeItem("stats");
-  console.log("After reset:", stats);
-  updatePage();
+  if (
+    confirm(
+      "Are you sure you want to reset? You will lose all of your hard earned eggs D:"
+    )
+  ) {
+    stats.eggCount = 0;
+    stats.eps = 0;
+    stats.upgrades = 0;
+    upgradeCount1 = 0;
+    upgradeCount2 = 0;
+    upgradeCount3 = 0;
+    upgradeCount4 = 0;
+    localStorage.removeItem("stats");
+    updatePage();
+    playresetSound();
+  }
 }
 
-// pop noise for egg
 function playeggSound() {
   var eggSound = new Audio("./assets/pop.mp3");
   eggSound.volume = 0.5;
@@ -95,16 +185,17 @@ eggClick.addEventListener("click", function () {
   playeggSound();
 });
 
-// magical sound for upgrade
 function playUpgradeButtonSound() {
   var upgradeButtonSound = new Audio("./assets/wowww.mp3");
   upgradeButtonSound.volume = 0.1;
   upgradeButtonSound.play();
 }
 
-eggUpgrade1.addEventListener("click", function () {
-  playUpgradeButtonSound();
-});
+function playresetSound() {
+  var resetSound = new Audio("./assets/bonk.mp3");
+  resetSound.volume = 0.5;
+  resetSound.play();
+}
 
 setInterval(function () {
   stats.eggCount += stats.eps;
