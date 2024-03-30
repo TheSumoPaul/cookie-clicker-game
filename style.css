@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 100px;
+  margin: 10px;
+  text-transform: uppercase;
+}
+
+#eggClick {
+  display: block;
+  margin-left: 200px;
+  background-color: transparent;
+  border: none;
+  width: 470px;
+  transition: transform 0.3s ease;
+}
+
+#eggClick:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+#eggClick.clicked {
+  transform: scale(0.95);
+}
+
+#eggUpgrade1 {
+  display: block;
+  margin-left: auto;
+  margin-right: 200px;
+}
