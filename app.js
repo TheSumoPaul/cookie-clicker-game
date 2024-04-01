@@ -9,14 +9,18 @@ document.getElementById("reset").addEventListener("click", resetGameProgress);
 
 const backgroundMusic = document.getElementById("backgroundMusic");
 
-backgroundMusic.volume = 0.15;
+backgroundMusic.muted = true;
+document.addEventListener("click", function enableAudio() {
+  backgroundMusic.muted = false;
+  backgroundMusic.play();
+  document.removeEventListener("click", enableAudio);
+});
+backgroundMusic.volume = 0.1;
 
 let upgradeCount1 = 0; // for first upgrade
 let upgradeCount2 = 0; // for second upgrade
 let upgradeCount3 = 0; // for third upgrade
 let upgradeCount4 = 0; // for fourth upgrade
-
-let originalMusicSrc = "./assets/silly.mp3";
 
 const stats = {
   eggCount: 0,
@@ -126,6 +130,8 @@ function buyUpgrade3() {
   }
 }
 
+let isMusicPlaying = false;
+
 function buyUpgrade4() {
   const upgradeCost4 = getUpgradeCost4();
   if (stats.eggCount >= upgradeCost4) {
@@ -142,9 +148,10 @@ function buyUpgrade4() {
     h1Element.classList.add("rainbow-text");
     setTimeout(() => {
       document.body.classList.remove("shake-animation");
-      backgroundMusic.src = originalMusicSrc;
-      backgroundMusic.play();
       h1Element.classList.remove("rainbow-text");
+      backgroundMusic.src = "./assets/silly.mp3";
+      backgroundMusic.loop = true;
+      backgroundMusic.play();
     }, 30000);
   } else {
     alert("Not enough eggs to buy the upgrade!");
