@@ -16,17 +16,26 @@ let upgradeCount2 = 0; // for second upgrade
 let upgradeCount3 = 0; // for third upgrade
 let upgradeCount4 = 0; // for fourth upgrade
 
-let originalMusicSrc = "./assets/silly.mp3"; // Original music source
+let originalMusicSrc = "./assets/silly.mp3";
 
 const stats = {
   eggCount: 0,
   eps: 0,
+  upgradeCount1: 0,
+  upgradeCount2: 0,
+  upgradeCount3: 0,
+  upgradeCount4: 0,
 };
 
+// local storage
 const savedStats = JSON.parse(localStorage.getItem("stats"));
 if (savedStats !== null) {
   stats.eggCount = savedStats.eggCount;
   stats.eps = savedStats.eps;
+  upgradeCount1 = savedStats.upgradeCount1;
+  upgradeCount2 = savedStats.upgradeCount2;
+  upgradeCount3 = savedStats.upgradeCount3;
+  upgradeCount4 = savedStats.upgradeCount4;
   updatePage();
 }
 
@@ -58,7 +67,6 @@ function updatePage() {
     " eggs)";
 }
 
-// local storage
 function updateStorage() {
   stats.eggCount = stats.eggCount;
   stats.eps = stats.eps;
@@ -130,11 +138,14 @@ function buyUpgrade4() {
     backgroundMusic.src = "./assets/BANG.mp3";
     backgroundMusic.play();
     document.body.classList.add("shake-animation");
+    const h1Element = document.querySelector("h1");
+    h1Element.classList.add("rainbow-text");
     setTimeout(() => {
       document.body.classList.remove("shake-animation");
-      backgroundMusic.src = originalMusicSrc; // Revert back to original song
+      backgroundMusic.src = originalMusicSrc;
       backgroundMusic.play();
-    }, 30000); // Remove the animation after 30 seconds
+      h1Element.classList.remove("rainbow-text");
+    }, 30000);
   } else {
     alert("Not enough eggs to buy the upgrade!");
   }
@@ -195,6 +206,11 @@ function playresetSound() {
   var resetSound = new Audio("./assets/bonk.mp3");
   resetSound.volume = 0.5;
   resetSound.play();
+}
+
+function playBackgroundMusic() {
+  var backgroundMusic = new Audio("./assets/silly.mp3");
+  backgroundMusic.play();
 }
 
 setInterval(function () {

@@ -1,5 +1,4 @@
 * {
-  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   max-width: 100%;
 }
@@ -15,6 +14,11 @@ h1 {
   margin: 10px;
   text-transform: uppercase;
   color: #ff5d5d;
+}
+
+h2 {
+  text-align: center;
+  text-transform: uppercase;
 }
 
 #eggClick {
@@ -57,6 +61,8 @@ h1 {
   display: block;
   margin-bottom: 40px;
   color: #2cac5d;
+  max-width: 400px;
+  margin-left: 50px;
 }
 
 #reset {
@@ -79,7 +85,7 @@ h1 {
 #eggUpgradeContainer {
   display: flex;
   flex-direction: column;
-  margin-top: -300px;
+  margin-top: -390px;
   align-items: flex-end;
 }
 
@@ -173,8 +179,8 @@ h1 {
   border: none;
   border-radius: 12px;
   width: 450px;
-  color: transparent; /* Set text color to transparent */
-  animation: rainbow 12s infinite; /* Apply rainbow animation */
+  color: transparent;
+  animation: rainbow 12s infinite;
 }
 
 #eggUpgrade4:hover {
@@ -220,4 +226,76 @@ h1 {
 
 .shake-animation {
   animation: shake 0.5s ease-in-out infinite;
+}
+
+.rainbow-text {
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbowAnimation 5s linear infinite;
+}
+
+@keyframes rainbowAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.signup-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 6px solid #ff5d5d;
+  border-radius: 5px;
+  margin-top: 180px;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 380px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="username"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+#signupButton {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#signupButton:hover {
+  background-color: #218838;
 }
